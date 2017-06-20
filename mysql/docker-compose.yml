@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+   db:
+     image: mysql:latest
+     container_name: mysqldb
+#     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: myadmin
+       MYSQL_DATABASE: souldb
+       MYSQL_USER: soul
+       MYSQL_PASSWORD: soul1234
+     ports: 
+       - "3306:3306"
