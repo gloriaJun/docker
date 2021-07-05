@@ -3,6 +3,7 @@ services:
   nginx:
     image: nginx:latest
     container_name: nginx
+    hostname: nginx
     privileged: true
     restart: always
     volumes:
@@ -12,10 +13,13 @@ services:
       - 80:80
     environment:
       - TZ="Asia/Seoul
+    depends_on:
+      - jenkins-master
 
   jenkins-master:
     image: jenkins/jenkins:lts
     container_name: jenkins-master
+    hostname: jenkins-master
     privileged: true
     restart: always
     volumes:
