@@ -25,9 +25,22 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/bin/docker:/usr/bin/docker
-      - $HOME/jenkins_home2:/var/jenkins_home
+      - $HOME/jenkins_master:/var/jenkins_home
     ports:
-      # - 8080:8080
       - 50000:50000
     environment:
+      - TZ="Asia/Seoul"
+
+  jenkins-agent01:
+    image: jenkins/ssh-agent:latest
+    container_name: jenkins-agent01
+    hostname: jenkins-agent01
+    privileged: true
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+      - $HOME/jenkins_agent:/var/jenkins_home
+    environment:
+      - JENKINS_AGENT_SSH_PUBKEY="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDLT3ZHpTr..."
       - TZ="Asia/Seoul"
